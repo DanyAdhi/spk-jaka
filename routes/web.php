@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\ParticipantController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +34,14 @@ Route::prefix('admin')->group(function (){
     Route::post('faculty', [FacultyController::class, 'store']);
     Route::put('faculty/{id}', [FacultyController::class, 'update']);
     Route::delete('faculty/{id}', [FacultyController::class, 'destroy']);
+
+    // Router participant
+    Route::get('participant', [ParticipantController::class, 'index']);
+    Route::get('participant/create', [ParticipantController::class, 'create']);
+    Route::post('participant', [ParticipantController::class, 'store']);
+    Route::get('participant/{id}', [ParticipantController::class, 'edit']);
+    Route::put('participant/{id}', [ParticipantController::class, 'update']);
+    Route::delete('participant/{id}', [ParticipantController::class, 'destroy']);
 
 });
 

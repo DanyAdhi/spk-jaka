@@ -8,7 +8,6 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Overall Faculty</h6>
-            {{-- <button class="btn btn-sm btn-primary">Add Period</button> --}}
             <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#createModal"> Add Faculty</button>
         </div>
         <div class="card-body">
