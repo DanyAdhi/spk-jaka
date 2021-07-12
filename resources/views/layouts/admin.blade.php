@@ -72,6 +72,18 @@
                     <span>Participant</span>
                 </a>
             </li>
+            <li class="nav-item {{$url=='participant-score'?'active':''}}">
+                <a class="nav-link" href="{{url('admin/participant-score')}}">
+                    <i class="fas fa-fw fa-list-ol"></i>
+                    <span>Participant Score</span>
+                </a>
+            </li>
+            <li class="nav-item {{$url=='ranking'?'active':''}}">
+                <a class="nav-link" href="{{url('admin/ranking')}}">
+                    <i class="fas fa-fw fa-award"></i>
+                    <span>Ranking</span>
+                </a>
+            </li>
 
 
 

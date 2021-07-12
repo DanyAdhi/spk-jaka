@@ -6,6 +6,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\ParticipantScoreController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,6 +43,12 @@ Route::prefix('admin')->group(function (){
     Route::get('participant/{id}', [ParticipantController::class, 'edit']);
     Route::put('participant/{id}', [ParticipantController::class, 'update']);
     Route::delete('participant/{id}', [ParticipantController::class, 'destroy']);
+
+    // Router participant score
+    Route::get('participant-score', [ParticipantScoreController::class, 'index']);
+    Route::get('participant-score/{id}', [ParticipantScoreController::class, 'edit']);
+    Route::post('participant-score/{id}', [ParticipantScoreController::class, 'store']);
+    
 
 });
 
