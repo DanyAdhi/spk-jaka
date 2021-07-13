@@ -84,8 +84,6 @@ class RankingController extends Controller
         return view('ranking-saw.process', $data);
     }
 
-
-
     private function matrixNormalisasi($participants, $maxScore){
         $return = [];
         foreach($participants as $data){
@@ -101,7 +99,6 @@ class RankingController extends Controller
         }
         return $return;
     }
-
 
     private function algorithmSaw($matrixNormalisasi){
         $bobot = [10,8,6,4,2];
