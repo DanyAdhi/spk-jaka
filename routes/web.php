@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PeriodController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ParticipantScoreController;
@@ -13,11 +14,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/', [DashboardController::class, 'index']);
 
+Route::get('admin/login', [AuthController::class, 'index'])->name('login');;
+Route::post('admin/login', [AuthController::class, 'authLogin']);
 
-Route::prefix('admin')->group(function (){
-
+Route::prefix('admin')-> middleware('auth')->group(function (){
+    Route::get('logout', [AuthController::class, 'authLogout']);
+    
     // Router Dashboard 
     Route::get('dashboard', [DashboardController::class, 'index']);
 
@@ -51,8 +54,8 @@ Route::prefix('admin')->group(function (){
     Route::post('participant-score/{id}', [ParticipantScoreController::class, 'store']);
     
     // Router Ranking
-    Route::get('ranking-saw-process', [RankingController::class, 'processSaw']);
-    Route::get('ranking-saw', [RankingController::class, 'rankingSaw']);
+    Route::get('ranking/saw-process', [RankingController::class, 'processSaw']);
+    Route::get('ranking/saw', [RankingController::class, 'rankingSaw']);
 
 });
 
