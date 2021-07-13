@@ -17,7 +17,7 @@
                     </button>
                 </div>
             @endif
-          <form method="POST" action="{{url('admin/period/save')}}">
+          <form method="POST" action="{{url('admin/period')}}">
             @csrf
             <div class="form-group">
               <label for="year">Year</label>

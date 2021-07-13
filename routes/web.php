@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ParticipantScoreController;
+use App\Http\Controllers\RankingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,11 +22,11 @@ Route::prefix('admin')->group(function (){
     Route::get('dashboard', [DashboardController::class, 'index']);
 
     // Router Period
+    Route::get('period/create', [PeriodController::class, 'create']);
     Route::get('period', [PeriodController::class, 'index']);
     Route::get('period/{id}', [PeriodController::class, 'edit']);
     Route::put('period/{id}', [PeriodController::class, 'update']);
-    Route::get('period/create', [PeriodController::class, 'create']);
-    Route::post('period/save', [PeriodController::class, 'store']);
+    Route::post('period', [PeriodController::class, 'store']);
     Route::put('period/update-status/{id}', [PeriodController::class, 'updateStatus']);
     Route::delete('period/{id}', [PeriodController::class, 'deletePeriod']);
      
@@ -49,6 +50,9 @@ Route::prefix('admin')->group(function (){
     Route::get('participant-score/{id}', [ParticipantScoreController::class, 'edit']);
     Route::post('participant-score/{id}', [ParticipantScoreController::class, 'store']);
     
+    // Router Ranking
+    Route::get('ranking-saw-process', [RankingController::class, 'processSaw']);
+    Route::get('ranking-saw', [RankingController::class, 'rankingSaw']);
 
 });
 
