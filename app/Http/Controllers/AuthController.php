@@ -37,7 +37,7 @@ class AuthController extends Controller
             return Redirect::to('admin/dashboard');
         }
 
-        return Redirect::to('admin/login')->with('error', 'Email or Password wrong.');
+        return Redirect::to('admin/login')->with('errorLogin', 'Email or Password wrong.');
     }
 
     public function authLogout(){
