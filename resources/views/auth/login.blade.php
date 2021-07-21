@@ -39,17 +39,27 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                      <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
+                                    @if (session('errorLogin'))
+                                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{session('errorLogin')}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                    @endif
                                     <form class="user" action="{{ url('admin/login') }}" method="POST">
                                       @csrf
                                         <div class="form-group">
                                             <label class="ml-3 font-weight-bold">Username</label>
                                             <input type="text" name="username" class="form-control form-control-user" placeholder="Enter your username...">
+                                            <span class="text-danger">{{ $errors->first('username') }}</span>
                                         </div>
                                         <div class="form-group">
                                           <label class="ml-3 font-weight-bold">Password</label>
-                                            <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
+                                          <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
+                                          <span class="text-danger">{{ $errors->first('password') }}</span>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary btn-user btn-block">

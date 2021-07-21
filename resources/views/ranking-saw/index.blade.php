@@ -84,7 +84,7 @@
 
             <div class="pt-4">
                 @if (count($participants) != 0)
-                    <a href="{{ url('admin/ranking-saw-process')  }}" class='btn btn-md btn-danger'>Process Data</a>
+                    <a href="{{ url('admin/ranking/saw-process')  }}" class='btn btn-md btn-danger'>Process Data</a>
                 @endif
             </div>
 
