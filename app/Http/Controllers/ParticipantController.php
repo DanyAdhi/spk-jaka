@@ -103,7 +103,6 @@ class ParticipantController extends Controller
         ];
         $checkParticipant =  Participant::where($payloadCheck)->first();
         if($checkParticipant === null || $checkParticipant->id ==  $id){
-            dd('here');
             Participant::where('id', $id)->update([
                 'year'      => $request->input('year'),
                 'group'     => $request->input('group'),
