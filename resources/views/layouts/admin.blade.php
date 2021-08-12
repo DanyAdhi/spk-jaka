@@ -87,8 +87,8 @@
                 <div id="collapseTwo" class="collapse {{$url=='ranking'?'show':''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Proccess Ranking:</h6>
-                        <a class="collapse-item" href="{{ url('admin/ranking/saw') }}">SAW</a>
-                        <a class="collapse-item" href="{{ url('admin') }}">AHP</a>
+                        <a class="collapse-item" href="{{ url('admin/ranking/weight') }}">Setting Weight</a>
+                        <a class="collapse-item" href="{{ url('admin/ranking') }}">SAW</a>
                     </div>
                 </div>
             </li>

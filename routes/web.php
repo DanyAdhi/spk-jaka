@@ -15,7 +15,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('admin/login', [AuthController::class, 'index'])->name('login');;
+Route::get('admin', [AuthController::class, 'index']);
+Route::get('admin/login', [AuthController::class, 'index'])->name('login');
 Route::post('admin/login', [AuthController::class, 'authLogin']);
 
 Route::prefix('admin')-> middleware('auth')->group(function (){
@@ -54,8 +55,12 @@ Route::prefix('admin')-> middleware('auth')->group(function (){
     Route::post('participant-score/{id}', [ParticipantScoreController::class, 'store']);
     
     // Router Ranking
+    Route::post('ranking/weight-process', [RankingController::class, 'storeComparisonMatrix']);
+    Route::get('ranking/weight-process', [RankingController::class, 'viewComparisonMatrix']);
+    Route::get('ranking/weight', [RankingController::class, 'comparisonMatrix']);
+
     Route::get('ranking/saw-process', [RankingController::class, 'processSaw']);
-    Route::get('ranking/saw', [RankingController::class, 'rankingSaw']);
+    Route::get('ranking', [RankingController::class, 'rankingSaw']);
 
 });
 
