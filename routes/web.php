@@ -8,6 +8,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ParticipantScoreController;
+use App\Http\Controllers\WeightController;
 use App\Http\Controllers\RankingController;
 
 Route::get('/', function () {
@@ -26,39 +27,49 @@ Route::prefix('admin')-> middleware('auth')->group(function (){
     Route::get('dashboard', [DashboardController::class, 'index']);
 
     // Router Period
-    Route::get('period/create', [PeriodController::class, 'create']);
-    Route::get('period', [PeriodController::class, 'index']);
-    Route::get('period/{id}', [PeriodController::class, 'edit']);
-    Route::put('period/{id}', [PeriodController::class, 'update']);
-    Route::post('period', [PeriodController::class, 'store']);
-    Route::put('period/update-status/{id}', [PeriodController::class, 'updateStatus']);
-    Route::delete('period/{id}', [PeriodController::class, 'deletePeriod']);
+    Route::prefix('period')->group(function() {
+        Route::get('/create', [PeriodController::class, 'create']);
+        Route::get('/', [PeriodController::class, 'index']);
+        Route::get('/{id}', [PeriodController::class, 'edit']);
+        Route::put('/{id}', [PeriodController::class, 'update']);
+        Route::post('/', [PeriodController::class, 'store']);
+        Route::put('/update-status/{id}', [PeriodController::class, 'updateStatus']);
+        Route::delete('/{id}', [PeriodController::class, 'deletePeriod']);
+    });
      
     // Router faculty
-    Route::get('faculty', [FacultyController::class, 'index']);
-    Route::get('faculty/{id}', [FacultyController::class, 'show']);
-    Route::post('faculty', [FacultyController::class, 'store']);
-    Route::put('faculty/{id}', [FacultyController::class, 'update']);
-    Route::delete('faculty/{id}', [FacultyController::class, 'destroy']);
+    Route::prefix('faculty')->group(function() {
+        Route::get('/', [FacultyController::class, 'index']);
+        Route::get('/{id}', [FacultyController::class, 'show']);
+        Route::post('/', [FacultyController::class, 'store']);
+        Route::put('/{id}', [FacultyController::class, 'update']);
+        Route::delete('/{id}', [FacultyController::class, 'destroy']);
+    });
 
     // Router participant
-    Route::get('participant', [ParticipantController::class, 'index']);
-    Route::get('participant/create', [ParticipantController::class, 'create']);
-    Route::post('participant', [ParticipantController::class, 'store']);
-    Route::get('participant/{id}', [ParticipantController::class, 'edit']);
-    Route::put('participant/{id}', [ParticipantController::class, 'update']);
-    Route::delete('participant/{id}', [ParticipantController::class, 'destroy']);
+    Route::prefix('participant')->group(function(){
+        Route::get('/', [ParticipantController::class, 'index']);
+        Route::get('/create', [ParticipantController::class, 'create']);
+        Route::post('/', [ParticipantController::class, 'store']);
+        Route::get('/{id}', [ParticipantController::class, 'edit']);
+        Route::put('/{id}', [ParticipantController::class, 'update']);
+        Route::delete('/{id}', [ParticipantController::class, 'destroy']);
+    });
 
     // Router participant score
-    Route::get('participant-score', [ParticipantScoreController::class, 'index']);
-    Route::get('participant-score/{id}', [ParticipantScoreController::class, 'edit']);
-    Route::post('participant-score/{id}', [ParticipantScoreController::class, 'store']);
+    Route::prefix('participant-score')->group(function() {
+        Route::get('/', [ParticipantScoreController::class, 'index']);
+        Route::get('/{id}', [ParticipantScoreController::class, 'edit']);
+        Route::put('/{id}', [ParticipantScoreController::class, 'update']);
+    });
+
+    // Router Weight
+    Route::prefix('weight')->group(function() {
+        Route::post('/process', [WeightController::class, 'processAhp']);
+        Route::get('/', [WeightController::class, 'index']);
+    });
     
     // Router Ranking
-    Route::post('ranking/weight-process', [RankingController::class, 'storeComparisonMatrix']);
-    Route::get('ranking/weight-process', [RankingController::class, 'viewComparisonMatrix']);
-    Route::get('ranking/weight', [RankingController::class, 'comparisonMatrix']);
-
     Route::get('ranking/saw-process', [RankingController::class, 'processSaw']);
     Route::get('ranking', [RankingController::class, 'rankingSaw']);
 

@@ -78,22 +78,18 @@
                     <span>Participant Score</span>
                 </a>
             </li>
+            <li class="nav-item {{$url=='weight'?'active':''}}">
+                <a class="nav-link" href="{{url('admin/weight')}}">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>Weight</span>
+                </a>
+            </li>
             <li class="nav-item {{$url=='ranking'?'active':''}}">
-                <a class="nav-link {{$url=='ranking'?'':'collapsed'}}" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="{{url('admin/ranking')}}">
                     <i class="fas fa-fw fa-award"></i>
                     <span>Ranking</span>
                 </a>
-                <div id="collapseTwo" class="collapse {{$url=='ranking'?'show':''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Proccess Ranking:</h6>
-                        <a class="collapse-item" href="{{ url('admin/ranking/weight') }}">Setting Weight</a>
-                        <a class="collapse-item" href="{{ url('admin/ranking') }}">SAW</a>
-                    </div>
-                </div>
             </li>
-
-
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

@@ -12,18 +12,18 @@ use Illuminate\Support\Facades\Redirect;
 class ParticipantScoreController extends Controller
 {
     public function index(){
-        $participantScores = DB::table('participants as p')
-                            ->select( 'p.id', 'p.year', 'p.group', 'p.npm', 'p.name', 'ps.kemuhammadiyahan', 'ps.imm', 'ps.tauhid', 'ps.ibadah', 'ps.bta')
-                            ->leftjoin('participant_scores as ps', 'p.id', '=', 'ps.participant_id')
-                            ->get();
-        
-        return view('participant-score.index', ['participantScores' => $participantScores]);
+      $participantScores = DB::table('participants as p')
+                          ->select( 'p.id', 'p.year', 'p.group', 'p.npm', 'p.name', 'ps.kemuhammadiyahan', 'ps.imm', 'ps.tauhid', 'ps.ibadah', 'ps.bta')
+                          ->leftjoin('participant_scores as ps', 'p.id', '=', 'ps.participant_id')
+                          ->orderBy('id', 'DESC')
+                          ->get();
+      
+      return view('participant-score.index', ['participantScores' => $participantScores]);
     }
-
 
     public function edit($id){
         $participantScore = DB::table('participants as p')
-                            ->select( 'p.id', 'p.year', 'p.group', 'p.npm', 'p.name', 'ps.kemuhammadiyahan', 'ps.imm', 'ps.tauhid', 'ps.ibadah', 'ps.bta')
+                            ->select( 'ps.id', 'ps.participant_id', 'p.year', 'p.group', 'p.npm', 'p.name', 'ps.kemuhammadiyahan', 'ps.imm', 'ps.tauhid', 'ps.ibadah', 'ps.bta')
                             ->leftjoin('participant_scores as ps', 'p.id', '=', 'ps.participant_id')
                             ->where('p.id', '=', $id)
                             ->get();
@@ -31,7 +31,7 @@ class ParticipantScoreController extends Controller
     }
 
 
-    public function store(Request $request, $id){
+    public function update(Request $request, $id){
         $validator = Validator::make($request->all(),[
             'kemuhammadiyahan'  => 'numeric|min:0|max:100',
             'imm'               => 'numeric|min:0|max:100',
@@ -44,26 +44,16 @@ class ParticipantScoreController extends Controller
         }
 
         $check = ParticipantScore::where('id', $id)->first();
-
-        if($check == null){
-            ParticipantScore::create([
-                'participant_id'    => $id,
-                'kemuhammadiyahan'  => $request->input('kemuhammadiyahan'),
-                'imm'               => $request->input('imm'),
-                'tauhid'            => $request->input('tauhid'),
-                'ibadah'            => $request->input('ibadah'),
-                'bta'               => $request->input('bta'),
-            ]);
-        }else{
-            ParticipantScore::where('id', $id)->update([
-                'kemuhammadiyahan'  => $request->input('kemuhammadiyahan'),
-                'imm'               => $request->input('imm'),
-                'tauhid'            => $request->input('tauhid'),
-                'ibadah'            => $request->input('ibadah'),
-                'bta'               => $request->input('bta'),
-            ]);
+        if($check === null){
+            return redirect()->back()->with('error','Data not found')->withInput($request->all());
         }
-
+        ParticipantScore::where('id', $id)->update([
+            'kemuhammadiyahan'  => $request->input('kemuhammadiyahan'),
+            'imm'               => $request->input('imm'),
+            'tauhid'            => $request->input('tauhid'),
+            'ibadah'            => $request->input('ibadah'),
+            'bta'               => $request->input('bta'),
+        ]);
         return Redirect::to('admin/participant-score')->with('success', 'Success update participant score');
 
     }
