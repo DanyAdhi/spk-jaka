@@ -14,12 +14,12 @@ class WeightSeeder extends Seeder
      */
     public function run()
     {
-        $name = ['kemuhamadiyahan', 'imm', 'tauhid', 'ibadah', 'bta'];
-        foreach($name as $value){
-            DB::table('weights')->insert([
-                'name'      => $value,
-                'weight'    => 1
-            ]);
-        }
+      $name = ['kemuhamadiyahan', 'imm', 'tauhid', 'ibadah', 'bta'];
+      foreach($name as $value){
+        DB::table('weights')->insert([
+          'name'      => $value,
+          'weight'    => 1
+        ]);
+      }
     }
 }

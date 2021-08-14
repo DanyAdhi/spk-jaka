@@ -14,16 +14,16 @@ class ComparisonMatrices extends Seeder
      */
     public function run()
     {
-        $name = ['kemuhamadiyahan', 'imm', 'tauhid', 'ibadah', 'bta'];
-        for ($i=0; $i < 5; $i++) { 
-            DB::table('comparison_matrices')->insert([
-                'name'      => $name[$i],
-                'kemuh'     => 1,
-                'imm'       => 1,
-                'tauhid'    => 1,
-                'ibadah'    => 1,
-                'bta'       => 1,
-            ]);
-        }
+      $name = ['kemuhamadiyahan', 'imm', 'tauhid', 'ibadah', 'bta'];
+      for ($i=0; $i < 5; $i++) { 
+        DB::table('comparison_matrices')->insert([
+          'name'      => $name[$i],
+          'kemuh'     => 1,
+          'imm'       => 1,
+          'tauhid'    => 1,
+          'ibadah'    => 1,
+          'bta'       => 1,
+        ]);
+      }
     }
 }

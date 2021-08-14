@@ -70,8 +70,10 @@ Route::prefix('admin')-> middleware('auth')->group(function (){
     });
     
     // Router Ranking
-    Route::get('ranking/saw-process', [RankingController::class, 'processSaw']);
-    Route::get('ranking', [RankingController::class, 'rankingSaw']);
+    Route::prefix('ranking')->group(function(){
+        Route::get('/saw-process', [RankingController::class, 'processSaw']);
+        Route::get('/', [RankingController::class, 'rankingSaw']);
+    });
 
 });
 
