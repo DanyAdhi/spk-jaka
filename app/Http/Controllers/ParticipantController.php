@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Participant;
+use App\Models\ParticipantScore;
 use App\Models\Period;
 use App\Models\Faculty;
 
 class ParticipantController extends Controller
 {
     public function index(){
-        $data = Participant::orderBy('id', 'DESC')->get();
-        return view('participant.index', ['participants' => $data]);
+      $data = Participant::orderBy('id', 'DESC')->get();
+      return view('participant.index', ['participants' => $data]);
     }
 
     public function create(){
@@ -54,7 +55,7 @@ class ParticipantController extends Controller
             return redirect()->back()->with('error', "Participant alredy exists")->withInput($request->all());
         }
 
-        Participant::create([
+        $saveParticipant = Participant::create([
             'year'      => $request->input('year'),
             'group'     => $request->input('group'),
             'npm'       => $request->input('npm'),
@@ -65,9 +66,18 @@ class ParticipantController extends Controller
             'address'   => $request->input('address'),
         ]);
 
+        ParticipantScore::create([
+            'participant_id'    => $saveParticipant->id,
+            'kemuhammadiyahan'  => 0,
+            'imm'               => 0,
+            'tauhid'            => 0,
+            'ibadah'            => 0,
+            'bta'               => 0,
+        ]);
+
+
         return Redirect::to('admin/participant')->with('success', 'Success create participant');
     }
-
 
     public function edit($id){
         $participant = Participant::where('id', $id)->firstOrFail();
@@ -121,6 +131,7 @@ class ParticipantController extends Controller
 
     public function destroy($id){
         Participant::where('id', $id)->delete();
+        ParticipantScore::where('participant_id', $id)->delete();
         return Redirect::to('admin/participant')->with('success', 'Success delete participant');
     }
 

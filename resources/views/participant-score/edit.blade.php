@@ -17,9 +17,12 @@
               </button>
             </div>
           @endif
-
+            @php
+                var_dump($participantScore->id);
+            @endphp
           <form method="POST" action="{{url('admin/participant-score', [$participantScore->id])}}">
             @csrf
+            @method('PUT')
             <div class="row">
               <div class="col">
                 <div class="form-group">
