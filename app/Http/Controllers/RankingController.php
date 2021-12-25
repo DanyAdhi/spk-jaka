@@ -90,11 +90,11 @@ class RankingController extends Controller
         foreach($participants as $data){
             $normalisasi = [
                 'name'              => $data->name,
-                'kemuhammadiyahan'  => round($data->kemuhammadiyahan/$maxScore->kemuhammadiyahan, 2),
-                'imm'               => round($data->imm/$maxScore->imm, 2),
-                'tauhid'            => round($data->tauhid/$maxScore->tauhid, 2),
-                'ibadah'            => round($data->ibadah/$maxScore->ibadah, 2),
-                'bta'               => round($data->bta/$maxScore->bta, 2),
+                'kemuhammadiyahan'  => round($maxScore->kemuhammadiyahan === 0 ? 0 : ($data->kemuhammadiyahan/$maxScore->kemuhammadiyahan), 2),
+                'imm'               => round($maxScore->imm === 0? 0: ($data->imm/$maxScore->imm), 2),
+                'tauhid'            => round($maxScore->tauhid === 0? 0: ($data->tauhid/$maxScore->tauhid), 2),
+                'ibadah'            => round($maxScore->ibadah === 0? 0: ($data->ibadah/$maxScore->ibadah), 2),
+                'bta'               => round($maxScore->bta === 0? 0: ($data->bta/$maxScore->bta), 2),
             ];
             array_push($return, $normalisasi);
         }
