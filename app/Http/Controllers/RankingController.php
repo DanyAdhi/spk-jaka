@@ -91,10 +91,10 @@ class RankingController extends Controller
             $normalisasi = [
                 'name'              => $data->name,
                 'kemuhammadiyahan'  => $maxScore->kemuhammadiyahan === 0 ? 0 : ($data->kemuhammadiyahan/$maxScore->kemuhammadiyahan),
-                'imm'               => $maxScore->imm === 0? 0: ($data->imm/$maxScore->imm),
-                'tauhid'            => $maxScore->tauhid === 0? 0: ($data->tauhid/$maxScore->tauhid),
-                'ibadah'            => $maxScore->ibadah === 0? 0: ($data->ibadah/$maxScore->ibadah),
-                'bta'               => $maxScore->bta === 0? 0: ($data->bta/$maxScore->bta),
+                'imm'               => $maxScore->imm === 0 ? 0: number_format($data->imm/$maxScore->imm, 2, '.', ''),
+                'tauhid'            => $maxScore->tauhid === 0 ? 0: number_format($data->tauhid/$maxScore->tauhid, 2, '.', ''),
+                'ibadah'            => $maxScore->ibadah === 0 ? 0: number_format($data->ibadah/$maxScore->ibadah, 2, '.', ''),
+                'bta'               => $maxScore->bta === 0 ? 0: number_format($data->bta/$maxScore->bta, 2, '.', ''),
             ];
             array_push($return, $normalisasi);
         }
