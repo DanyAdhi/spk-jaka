@@ -90,11 +90,11 @@ class RankingController extends Controller
         foreach($participants as $data){
             $normalisasi = [
                 'name'              => $data->name,
-                'kemuhammadiyahan'  => round($maxScore->kemuhammadiyahan === 0 ? 0 : ($data->kemuhammadiyahan/$maxScore->kemuhammadiyahan), 2),
-                'imm'               => round($maxScore->imm === 0? 0: ($data->imm/$maxScore->imm), 2),
-                'tauhid'            => round($maxScore->tauhid === 0? 0: ($data->tauhid/$maxScore->tauhid), 2),
-                'ibadah'            => round($maxScore->ibadah === 0? 0: ($data->ibadah/$maxScore->ibadah), 2),
-                'bta'               => round($maxScore->bta === 0? 0: ($data->bta/$maxScore->bta), 2),
+                'kemuhammadiyahan'  => $maxScore->kemuhammadiyahan === 0 ? 0 : ($data->kemuhammadiyahan/$maxScore->kemuhammadiyahan),
+                'imm'               => $maxScore->imm === 0? 0: ($data->imm/$maxScore->imm),
+                'tauhid'            => $maxScore->tauhid === 0? 0: ($data->tauhid/$maxScore->tauhid),
+                'ibadah'            => $maxScore->ibadah === 0? 0: ($data->ibadah/$maxScore->ibadah),
+                'bta'               => $maxScore->bta === 0? 0: ($data->bta/$maxScore->bta),
             ];
             array_push($return, $normalisasi);
         }
@@ -107,13 +107,13 @@ class RankingController extends Controller
 
         // process algorithm saw
         foreach ($matrixNormalisasi as $data) {
-            $sawPoin = ( 
+            $sawPoin = number_format(( 
               ($data['kemuhammadiyahan'] * $weight[0]) +
               ($data['imm'] * $weight[1]) +
               ($data['tauhid'] * $weight[2]) +
               ($data['ibadah'] * $weight[3]) +
               ($data['bta'] * $weight[4]) 
-            );
+            ), 2, '.', '');
             $ranking = [
               'name'  => $data['name'],
               'poin'  => $sawPoin
