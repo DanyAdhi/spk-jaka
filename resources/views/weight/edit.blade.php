@@ -164,7 +164,7 @@
         const value = $(this).val();
         const id = $(this).attr("id");
         const idChange = id.split('').reverse().join('');
-        const valueChange = 1/value;
+        const valueChange = (1/value).toFixed(2);
 
         $(`#${idChange}`).val(valueChange);
 

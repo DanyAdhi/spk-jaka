@@ -21,7 +21,7 @@ class WeightController extends Controller
 
   public function processAhp(Request $request){
     $input = $request->input();
-    
+
     if(count($input) === 1){ //view => display comparasion matrix
       $getComparisonMatrix = ComparisonMatrix::get()->toArray();
       // var_dump($getComparisonMatrix);die;
@@ -124,11 +124,11 @@ class WeightController extends Controller
       $dataPush = [
         'id'      => $data['id'],
         'name'    => $data['name'],
-        'kemuh'   => number_format($data['kemuh']/$total['kemuh'], 3, ',', ''),
-        'imm'     => number_format($data['imm']/$total['imm'], 3, ',', ''),
-        'tauhid'  => number_format($data['tauhid']/$total['tauhid'], 3, ',', ''),
-        'ibadah'  => number_format($data['ibadah']/$total['ibadah'], 3, ',', ''),
-        'bta'     => number_format($data['bta']/$total['bta'], 3, ',', ''),
+        'kemuh'   => number_format($data['kemuh']/$total['kemuh'], 2, '.', ''),
+        'imm'     => number_format($data['imm']/$total['imm'], 2, '.', ''),
+        'tauhid'  => number_format($data['tauhid']/$total['tauhid'], 2, '.', ''),
+        'ibadah'  => number_format($data['ibadah']/$total['ibadah'], 2, '.', ''),
+        'bta'     => number_format($data['bta']/$total['bta'], 2, '.', ''),
       ];
       array_push($return, $dataPush);
     }
@@ -142,14 +142,17 @@ class WeightController extends Controller
   // Get Eigen Vector Normalization
   private function getEigenVectorNormalization($normalizationMatrix){
     $totalCriteria = count($normalizationMatrix);
+    
     $return = [];
     foreach($normalizationMatrix as $data){
+
       $total = str_replace(',', '.', $data['kemuh']) + str_replace(',', '.', $data['imm']) + str_replace(',', '.', $data['tauhid']) + str_replace(',', '.', $data['ibadah']) + str_replace(',', '.', $data['bta']);
+
       $dataPush = [
         'id'      => $data['id'],
         'name'    => $data['name'],
         'total'   => $total,
-        'eigen'   => $total / $totalCriteria,
+        'eigen'   => floatval(number_format($total/$totalCriteria, 2, '.', '')),
       ];
       array_push($return, $dataPush);
     }
