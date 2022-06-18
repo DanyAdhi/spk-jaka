@@ -90,7 +90,7 @@ class RankingController extends Controller
         foreach($participants as $data){
             $normalisasi = [
                 'name'              => $data->name,
-                'kemuhammadiyahan'  => $maxScore->kemuhammadiyahan === 0 ? 0 : ($data->kemuhammadiyahan/$maxScore->kemuhammadiyahan),
+                'kemuhammadiyahan'  => $maxScore->kemuhammadiyahan === 0 ? 0 : number_format($data->kemuhammadiyahan/$maxScore->kemuhammadiyahan,  2, '.', ''),
                 'imm'               => $maxScore->imm === 0 ? 0: number_format($data->imm/$maxScore->imm, 2, '.', ''),
                 'tauhid'            => $maxScore->tauhid === 0 ? 0: number_format($data->tauhid/$maxScore->tauhid, 2, '.', ''),
                 'ibadah'            => $maxScore->ibadah === 0 ? 0: number_format($data->ibadah/$maxScore->ibadah, 2, '.', ''),

@@ -93,11 +93,11 @@
                             @foreach ($matrixNormalisasi as $data)
                                 <tr>
                                 <td>{{ $data['name'] }}</td>
-                                <td>{{ $data['kemuhammadiyahan'] }}</td>
-                                <td>{{ $data['imm'] }}</td>
-                                <td>{{ $data['tauhid'] }}</td>
-                                <td>{{ $data['ibadah'] }}</td>
-                                <td>{{ $data['bta'] }}</td>
+                                <td>{{ floatval($data['kemuhammadiyahan']) }}</td>
+                                <td>{{ floatval($data['imm']) }}</td>
+                                <td>{{ floatval($data['tauhid']) }}</td>
+                                <td>{{ floatval($data['ibadah']) }}</td>
+                                <td>{{ floatval($data['bta']) }}</td>
                                 </tr>
                             @endforeach
                             
